@@ -1,5 +1,11 @@
 /* Imports */
-import { addZero, nearestTenth, toFahrenheit, toCelsius } from "./helper.js";
+import {
+	addZero,
+	nearestTenth,
+	toFahrenheit,
+	toCelsius,
+	filterInput,
+} from "./helper.js";
 
 /* Global */
 const months = [
@@ -27,6 +33,8 @@ const days = [
 	"Saturday",
 ];
 
+const defaultCity = "Toronto";
+
 // Date
 function getTime() {
 	const currentDate = new Date();
@@ -41,26 +49,42 @@ function getTime() {
 	date.innerText = `${hour}:${minutes} | ${dayName}, ${month} ${day} '${year}`;
 }
 getTime();
-setInterval(getTime, 1000);
+setInterval(getTime, 4000);
 
 // Enter search function
 document
 	.querySelector(".search-bar")
-	.addEventListener("keyup", function (event) {
+	.addEventListener("keyup", async function (event) {
 		if (event.key == "Enter" || event.keyCode === 13) {
-			getWeather(`${document.querySelector(".search-bar").value}`);
+			const searchInput = document.querySelector(".search-bar").value;
+			let coords = await getWeather(filterInput(searchInput));
+			getForecast(coords.lat, coords.lon);
 		}
 	});
 
-// Fetch data from OpenWeather API
+// Fetch coordinates from city
 async function getWeather(city) {
 	const response = await fetch(
 		`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=fd6e9060ca22fc3927fa2ef4564a17d5&units=metric`,
 		{ mode: "cors" }
 	);
-	const weatherData = await response.json();
 
+	const weatherData = await response.json();
 	const location = document.querySelector("#location");
+	location.innerText = weatherData.name;
+	return weatherData.coord;
+}
+getWeather(defaultCity);
+
+// Fetch data for forecast
+async function getForecast(lat, lon) {
+	const response = await fetch(
+		`https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=alerts,minutely&appid=fd6e9060ca22fc3927fa2ef4564a17d5&units=metric`,
+		{ mode: "cors" }
+	);
+
+	const data = await response.json();
+	console.log(data);
 	const temperature = document.querySelector("#temperature");
 	const icon = document.querySelector(".icon");
 	const description = document.querySelector("#description");
@@ -70,16 +94,18 @@ async function getWeather(city) {
 	const feelsLike = document.querySelector("#feelsLike");
 	const wind = document.querySelector("#wind");
 
-	temperature.innerText = Math.round(weatherData.main.temp * 2) / 2 + "°C";
-	location.innerText = weatherData.name;
-	description.innerText = weatherData.weather[0].description;
-	icon.src = `http://openweathermap.org/img/wn/${weatherData.weather[0].icon}@2x.png`;
-	icon.alt = `icon of ${weatherData.weather[0].description}`;
-	tempMax.innerText = `${nearestTenth(weatherData.main.temp_max)}°`;
-	tempMin.innerText = `${nearestTenth(weatherData.main.temp_min)}°`;
-	humidity.innerText = `${weatherData.main.humidity}%`;
-	feelsLike.innerText = `${nearestTenth(weatherData.main.feels_like)}°`;
-	wind.innerText = `${nearestTenth(weatherData.wind.speed)}m/s`;
-	visibility.innerText = `${nearestTenth(weatherData.visibility / 1000)}km`;
+	temperature.innerText = Math.round(data.current.temp * 2) / 2 + "°C";
+	description.innerText = data.current.weather[0].description;
+	icon.src = `http://openweathermap.org/img/wn/${data.current.weather[0].icon}@2x.png`;
+	icon.alt = `icon of ${data.current.weather[0].description}`;
+	tempMax.innerText = `${nearestTenth(data.daily[0].temp.max)}°`;
+	tempMin.innerText = `${nearestTenth(data.daily[0].temp.min)}°`;
+	humidity.innerText = `${data.current.humidity}%`;
+	precipitation.innerText = `${data.daily[0].pop * 100}%`;
+	feelsLike.innerText = `${nearestTenth(data.current.feels_like)}°`;
+	wind.innerText = `${nearestTenth(data.current.wind_speed)}m/s`;
+	visibility.innerText = `${nearestTenth(data.current.visibility / 1000)}km`;
+	const dailyData = data;
+	return dailyData;
 }
-getWeather("Toronto");
+getForecast(43.7001, -79.4163);
