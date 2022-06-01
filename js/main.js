@@ -71,19 +71,25 @@ document
 			const searchInput = document.querySelector(".search-bar").value;
 			let coords = await getWeather(filterInput(searchInput));
 			getForecast(coords.lat, coords.lon);
+			// Clear search after enter
+			document.querySelector(".search-bar").value = "";
 		}
 	});
 
 // Fetch coordinates from city
 async function getWeather(city) {
-	const response = await fetch(
-		`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=fd6e9060ca22fc3927fa2ef4564a17d5&units=metric`,
-		{ mode: "cors" }
-	);
+	try {
+		const response = await fetch(
+			`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=fd6e9060ca22fc3927fa2ef4564a17d5&units=metric`,
+			{ mode: "cors" }
+		);
 
-	const weatherData = await response.json();
-	location.innerText = weatherData.name;
-	return weatherData.coord;
+		const weatherData = await response.json();
+		location.innerText = weatherData.name;
+		return weatherData.coord;
+	} catch (err) {
+		console.log("error");
+	}
 }
 getWeather(defaultCity);
 
@@ -129,7 +135,7 @@ async function getForecast(lat, lon) {
 			dayNameEl.classList.add("card-header");
 			imgEl.classList.add("icons");
 			descEl.classList.add("desc");
-			wrapperEl.classList.add("subheader-wrapper");
+			wrapperEl.classList.add("flex-row");
 			tempWrapperEl.classList.add("temp-wrapper");
 			tempMaxEl.classList.add("tempMax");
 			tempMinEl.classList.add("tempMin");

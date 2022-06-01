@@ -211,14 +211,15 @@ button {
 .dayCard {
 	display: flex;
 	flex-direction: column;
+	padding-left: 8px;
 	border: 1px solid rgba(255, 255, 255, 0.55);
 	background-color: rgba(255, 255, 255, 0.2);
 	backdrop-filter: blur(8px);
 	border-radius: 4px;
-	width: 12%;
-	height: 112px;
+	width: 10%;
+	height: 96px;
 	margin-bottom: 16px;
-	padding: 2px;
+	align-content: flex-end;
 	transition: background-color .225s ease-out;
 }
 
@@ -231,16 +232,10 @@ button {
 	transition: background-color .225s ease-out;
 }
 
-.subheader-wrapper {
-	display: flex;
-	flex-direction: row;
-}
-
 .temp-wrapper {
 	display: flex;
 	flex-direction: row;
 	justify-content: center;
-	margin-top: 16px;
 }
 
 .tempMax {
@@ -249,14 +244,12 @@ button {
 
 .card-header {
 	font-size: 1rem;
-	margin-top: 8px;
-	margin-left: 8px;
+	margin-top: 4px;
 }
 
 .icons {
 	width: 32px;
 	height: 32px;
-	margin-left: 2px;
 }
 
 .desc {
@@ -265,6 +258,11 @@ button {
 	font-weight: 400;
 	margin-top: 6px;
 	margin-bottom: 12px;
+}
+
+/* Error message */
+.error {
+
 }
 
 @media screen and (max-width: 1080px) {
