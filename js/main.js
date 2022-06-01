@@ -186,8 +186,17 @@ async function getForecast(lat, lon) {
 			data.daily[i + 1].weather[0].icon
 		}@2x.png`;
 	});
+
 	updateDesc.forEach((element, i) => {
 		element.innerText = data.daily[i + 1].weather[0].description;
+	});
+
+	updateTempMax.forEach((element, i) => {
+		element.innerText = `H: ${Math.round(data.daily[i + 1].temp.max)}°`;
+	});
+
+	updateTempMin.forEach((element, i) => {
+		element.innerText = `L: ${Math.round(data.daily[i + 1].temp.min)}°`;
 	});
 }
 getForecast(43.7001, -79.4163);
