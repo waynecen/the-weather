@@ -78,18 +78,14 @@ document
 
 // Fetch coordinates from city
 async function getWeather(city) {
-	try {
-		const response = await fetch(
-			`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=fd6e9060ca22fc3927fa2ef4564a17d5&units=metric`,
-			{ mode: "cors" }
-		);
+	const response = await fetch(
+		`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=fd6e9060ca22fc3927fa2ef4564a17d5&units=metric`,
+		{ mode: "cors" }
+	);
 
-		const weatherData = await response.json();
-		location.innerText = weatherData.name;
-		return weatherData.coord;
-	} catch (err) {
-		console.log("error");
-	}
+	const weatherData = await response.json();
+	location.innerText = weatherData.name;
+	return weatherData.coord;
 }
 getWeather(defaultCity);
 
