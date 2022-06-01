@@ -7,6 +7,7 @@ html, body {
 	background-color: rgb(48, 48, 48);
 	color: rgb(249, 249, 249);
 	font-size: 16px;
+	font-weight: 300;
 }
 
 body {
@@ -18,20 +19,22 @@ body {
 main {
 	background: url("/img/bg.jpg");
 	background-size: cover;
+	backdrop-filter: grayscale(0.5) opacity(0.1)
 	background-repeat: no-repeat;
 	background-attachment: fixed;
 	width: 100vw;
 	height: 100vh;
 	display: flex;
-	flex-direction: row;
-}
-
-section {
-	margin-left: 32px;
+	flex-direction: column;
 }
 
 a {
 	text-decoration: none;
+}
+
+.wrapper {
+	margin-left: 2.5%;
+	margin-right: 2.5%;
 }
 
 /* Helper/Utility */
@@ -45,17 +48,20 @@ a {
 	flex-direction: column;
 }
 
+.between {
+	display: flex;
+	justify-content: space-between;
+}
+
 .center {
+	display: flex;
 	justify-content: center;
 }
 
 /* Navigation Bar */
 .navBar {
-	display: flex;
-	flex-direction: row;
 	align-items: flex-end;
 	justify-content: space-between;
-	margin-right: 32px;
 }
 
 h3 {
@@ -111,24 +117,16 @@ input:focus::placeholder {
 }
 
 /* Weather Data */
-.wrapper {
-	margin-bottom: 32px;
-}
 
 /* Icon and Weather Description */
-.icon {
-	margin-right: 4px;
-}
-
 .left-wrapper {
 	margin-right: 32px;
-	
 }
 
 #description {
 	font-size: 1rem;
 	font-weight: 500;
-	margin-top: 6px;
+	margin-top: 4px;
 }
 
 /* Temperature */
@@ -153,11 +151,6 @@ input:focus::placeholder {
 	font-weight: 500;
 }
 
-.wrapper-inner-right {
-	display: flex;
-	flex-direction: row;
-}
-
 .mini-card {
 	margin-right: 60px;
 }
@@ -174,7 +167,6 @@ input:focus::placeholder {
 .divider {
 	margin-top: 16px;
 	margin-bottom: 32px;
-	margin-left: -32px;
 	width: 100vw;
 	border-bottom: 1px rgba(238, 238, 238, 0.342) solid;
 }
@@ -202,4 +194,44 @@ button {
 	backdrop-filter: blur(5px);
 	width: 300px;
 	height: 100vh;
+}
+
+/* 8-day Forecast */
+.subheader-forecast {
+	margin-bottom: 16px;
+}
+
+.dayCard {
+	display: flex;
+	flex-direction: column;
+	border: 1px solid rgba(255, 255, 255, 0.548);
+	background-color: rgba(255, 255, 255, 0.144);
+	backdrop-filter: blur(8px);
+	border-radius: 4px;
+	width: fit-content;
+	min-width: 480px;
+	margin-bottom: 12px;
+}
+
+.subheader-wrapper {
+	display: flex;
+	flex-direction: row;
+}
+
+.card-header {
+	font-size: 1rem;
+	margin-top: 8px;
+	margin-left: 8px;
+}
+
+.icons {
+	width: 32px;
+	margin-left: 2px;
+}
+
+.desc {
+	font-size: 0.9rem;
+	font-weight: 400;
+	margin-top: 8px;
+	margin-bottom: 12px;
 }

@@ -33,9 +33,21 @@ const days = [
 	"Saturday",
 ];
 
+// Default weather location
 const defaultCity = "Toronto";
 
-// Date
+// Current weather selectors
+const temperature = document.querySelector("#temperature");
+const location = document.querySelector("#location");
+const icon = document.querySelector(".icon");
+const description = document.querySelector("#description");
+const humidity = document.querySelector("#humidity");
+const tempMin = document.querySelector("#tempMin");
+const tempMax = document.querySelector("#tempMax");
+const feelsLike = document.querySelector("#feelsLike");
+const wind = document.querySelector("#wind");
+
+// Date & time
 function getTime() {
 	const currentDate = new Date();
 	let dayName = days[currentDate.getDay()];
@@ -70,7 +82,6 @@ async function getWeather(city) {
 	);
 
 	const weatherData = await response.json();
-	const location = document.querySelector("#location");
 	location.innerText = weatherData.name;
 	return weatherData.coord;
 }
@@ -85,15 +96,8 @@ async function getForecast(lat, lon) {
 
 	const data = await response.json();
 	console.log(data);
-	const temperature = document.querySelector("#temperature");
-	const icon = document.querySelector(".icon");
-	const description = document.querySelector("#description");
-	const humidity = document.querySelector("#humidity");
-	const tempMin = document.querySelector("#tempMin");
-	const tempMax = document.querySelector("#tempMax");
-	const feelsLike = document.querySelector("#feelsLike");
-	const wind = document.querySelector("#wind");
 
+	// Current forecast
 	temperature.innerText = Math.round(data.current.temp * 2) / 2 + "°C";
 	description.innerText = data.current.weather[0].description;
 	icon.src = `http://openweathermap.org/img/wn/${data.current.weather[0].icon}@2x.png`;
@@ -105,7 +109,57 @@ async function getForecast(lat, lon) {
 	feelsLike.innerText = `${nearestTenth(data.current.feels_like)}°`;
 	wind.innerText = `${nearestTenth(data.current.wind_speed)}m/s`;
 	visibility.innerText = `${nearestTenth(data.current.visibility / 1000)}km`;
-	const dailyData = data;
-	return dailyData;
+
+	// 8-day forecast
+	const dayCard = document.querySelectorAll(".dayCard");
+	dayCard.forEach((element, i) => {
+		const currentDate = new Date();
+
+		// Create HTML elements for first-time data
+		if (element.childElementCount == 0) {
+			const dayNameEl = document.createElement("h3");
+			const imgEl = document.createElement("img");
+			const descEl = document.createElement("div");
+			const wrapperEl = document.createElement("div");
+
+			// Add Classes
+			dayNameEl.classList.add("card-header");
+			imgEl.classList.add("icons");
+			imgEl.classList.add("update-icons");
+			descEl.classList.add("desc");
+			descEl.classList.add("update-desc");
+			wrapperEl.classList.add("subheader-wrapper");
+
+			// Fill in data
+			let dayRotation =
+				days[
+					currentDate.getDay() + (i + 1) > 6
+						? 0 + i - currentDate.getDay()
+						: currentDate.getDay() + (i + 1)
+				];
+			dayNameEl.innerText = dayRotation;
+			imgEl.src = `http://openweathermap.org/img/wn/${
+				data.daily[i + 1].weather[0].icon
+			}@2x.png`;
+			descEl.innerText = data.daily[i + 1].weather[0].description;
+
+			element.append(dayNameEl);
+			element.append(wrapperEl);
+			wrapperEl.append(imgEl);
+			wrapperEl.append(descEl);
+		}
+	});
+
+	// Update 8-day forecast data
+	const updateIcons = document.querySelectorAll(".update-icons");
+	const updateDesc = document.querySelectorAll(".update-desc");
+	updateIcons.forEach((element, i) => {
+		element.src = `http://openweathermap.org/img/wn/${
+			data.daily[i + 1].weather[0].icon
+		}@2x.png`;
+	});
+	updateDesc.forEach((element, i) => {
+		element.innerText = data.daily[i + 1].weather[0].description;
+	});
 }
 getForecast(43.7001, -79.4163);

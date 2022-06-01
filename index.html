@@ -15,101 +15,69 @@
 <body>
 	<noscript> You need JavaScript to run this app.</noscript>
 	<main>
-		<section>
-			<div class="navBar">
+			<div class="wrapper flex-row navBar">
 				<a href="/"><h3><span class="fw-l">the</span>.weather</h3></a>
 				<div class="search-wrapper">
 					<input type="text" class="search-bar" name="citySearch" placeholder="City, State, Country" autocomplete="off"><br>
 				</div>
 				<div id="date"></div>
 			</div>
-
 			<div class="divider"></div>
-
 			<div class="wrapper flex-row center">	
 				<div id="temperature"></div>
 				<div class="flex-col">
-						<div class="wrapper-right flex-col">
-							<div id="location"></div>
-							<div class="flex-row">
-								<img src="" alt="" class="icon" width="32px"/>
-								<div id="description"></div>
-							</div>
+					<div class="wrapper-right flex-col">
+						<div id="location"></div>
+						<div class="flex-row">
+							<img src="" alt="" class="icon" width="32px"/>
+							<div id="description"></div>
 						</div>
-						<div class="wrapper-inner-right">
-							<div class="mini-card">
-								<h4 class="subhead">H:</h4>
-								<div id="tempMax" class="fw-l"></div>
-							</div>
-							<div class="mini-card">
-								<h4 class="subhead">L:</h4>
-								<div id="tempMin" class="fw-l"></div>
-							</div>
-							<div class="mini-card">
-								<h4 class="subhead">Feels Like</h4>
-								<div id="feelsLike" class="fw-l"></div>
-							</div>
-							<div class="mini-card">
-								<h4 class="subhead">Humidity</h4>
-								<div id="humidity" class="fw-l"></div>
-							</div>
-							<div class="mini-card">
-								<h4 class="subhead">Chance of Rain</h4>
-								<div id="precipitation" class="fw-l"></div>
-							</div>
-							<div class="mini-card">
-								<h4 class="subhead">Wind</h4>
-								<div id="wind" class="fw-l"></div>
-							</div>
-							<div class="mini-card">
-								<h4 class="subhead">Visibility</h4>
-								<div id="visibility" class="fw-l"></div>
-							</div>
+					</div>
+					<div class="flex-row">
+						<div class="mini-card">
+							<h4 class="subhead">H:</h4>
+							<div id="tempMax" class="fw-l"></div>
 						</div>
+						<div class="mini-card">
+							<h4 class="subhead">L:</h4>
+							<div id="tempMin" class="fw-l"></div>
+						</div>
+						<div class="mini-card">
+							<h4 class="subhead">Feels Like</h4>
+							<div id="feelsLike" class="fw-l"></div>
+						</div>
+						<div class="mini-card">
+							<h4 class="subhead">Humidity</h4>
+							<div id="humidity" class="fw-l"></div>
+						</div>
+						<div class="mini-card">
+							<h4 class="subhead">Chance of Rain</h4>
+							<div id="precipitation" class="fw-l"></div>
+						</div>
+						<div class="mini-card">
+							<h4 class="subhead">Wind</h4>
+							<div id="wind" class="fw-l"></div>
+						</div>
+						<div class="mini-card">
+							<h4 class="subhead">Visibility</h4>
+							<div id="visibility" class="fw-l"></div>
+						</div>
+					</div>
 				</div>
 			</div>
-
 			<div class="divider"></div>
-
-			<div class="wrapper flex-row center">	
-				<h3>8-day Forecast</h3>
-				<div class="flex-col">
-						<div class="wrapper-right flex-col">
-							<div class="flex-row">
-								<img src="" alt="" class="icon1" width="32px"/>
-								<div id="description"></div>
-							</div>
-						</div>
-						<div class="wrapper-inner-right">
-							<div class="mini-card">
-								<h4 class="subhead"></h4>
-								<div id="tempMax" class="fw-l"></div>
-							</div>
-							<div class="mini-card">
-								<h4 class="subhead"></h4>
-								<div id="tempMin" class="fw-l"></div>
-							</div>
-							<div class="mini-card">
-								<h4 class="subhead"></h4>
-								<div id="feelsLike" class="fw-l"></div>
-							</div>
-							<div class="mini-card">
-								<h4 class="subhead"></h4>
-								<div id="humidity" class="fw-l"></div>
-							</div>
-							<div class="mini-card">
-								<h4 class="subhead"></h4>
-								<div id="wind" class="fw-l"></div>
-							</div>
-							<div class="mini-card">
-								<h4 class="subhead"></h4>
-								<div id="visibility" class="fw-l"></div>
-							</div>
-						</div>
+			<div class="wrapper center">	
+				<div class="flex-col between">
+					<h3 class="subheader-forecast">8-day Forecast</h3>
+					<div class="dayCard"></div>
+					<div class="dayCard"></div>
+					<div class="dayCard"></div>
+					<div class="dayCard"></div>
+					<div class="dayCard"></div>
+					<div class="dayCard"></div>
+					<div class="dayCard"></div>
 				</div>
 			</div>
-
-		</section>
 	</main>
 </body>
 </html>
