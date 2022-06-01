@@ -102,8 +102,8 @@ async function getForecast(lat, lon) {
 	description.innerText = data.current.weather[0].description;
 	icon.src = `http://openweathermap.org/img/wn/${data.current.weather[0].icon}@2x.png`;
 	icon.alt = `icon of ${data.current.weather[0].description}`;
-	tempMax.innerText = `${nearestTenth(data.daily[0].temp.max)}°`;
-	tempMin.innerText = `${nearestTenth(data.daily[0].temp.min)}°`;
+	tempMax.innerText = `H: ${nearestTenth(data.daily[0].temp.max)}°`;
+	tempMin.innerText = `L: ${nearestTenth(data.daily[0].temp.min)}°`;
 	humidity.innerText = `${data.current.humidity}%`;
 	precipitation.innerText = `${data.daily[0].pop * 100}%`;
 	feelsLike.innerText = `${nearestTenth(data.current.feels_like)}°`;
@@ -121,14 +121,24 @@ async function getForecast(lat, lon) {
 			const imgEl = document.createElement("img");
 			const descEl = document.createElement("div");
 			const wrapperEl = document.createElement("div");
+			const tempWrapperEl = document.createElement("div");
+			const tempMaxEl = document.createElement("div");
+			const tempMinEl = document.createElement("div");
 
 			// Add Classes
 			dayNameEl.classList.add("card-header");
 			imgEl.classList.add("icons");
-			imgEl.classList.add("update-icons");
 			descEl.classList.add("desc");
-			descEl.classList.add("update-desc");
 			wrapperEl.classList.add("subheader-wrapper");
+			tempWrapperEl.classList.add("temp-wrapper");
+			tempMaxEl.classList.add("tempMax");
+			tempMinEl.classList.add("tempMin");
+
+			// Add classes to update queries
+			imgEl.classList.add("update-icons");
+			descEl.classList.add("update-desc");
+			tempMaxEl.classList.add("update-tempMax");
+			tempMinEl.classList.add("update-tempMin");
 
 			// Fill in data
 			let dayRotation =
@@ -142,17 +152,29 @@ async function getForecast(lat, lon) {
 				data.daily[i + 1].weather[0].icon
 			}@2x.png`;
 			descEl.innerText = data.daily[i + 1].weather[0].description;
+			tempMaxEl.innerText = `H: ${Math.round(
+				data.daily[i + 1].temp.max
+			)}°`;
+			tempMinEl.innerText = `L: ${Math.round(
+				data.daily[i + 1].temp.min
+			)}°`;
 
 			element.append(dayNameEl);
 			element.append(wrapperEl);
+			element.append(tempWrapperEl);
 			wrapperEl.append(imgEl);
 			wrapperEl.append(descEl);
+			tempWrapperEl.append(tempMaxEl);
+			tempWrapperEl.append(tempMinEl);
 		}
 	});
 
 	// Update 8-day forecast data
 	const updateIcons = document.querySelectorAll(".update-icons");
 	const updateDesc = document.querySelectorAll(".update-desc");
+	const updateTempMax = document.querySelectorAll(".update-tempMax");
+	const updateTempMin = document.querySelectorAll(".update-tempMin");
+
 	updateIcons.forEach((element, i) => {
 		element.src = `http://openweathermap.org/img/wn/${
 			data.daily[i + 1].weather[0].icon

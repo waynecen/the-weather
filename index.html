@@ -23,8 +23,18 @@
 				<div id="date"></div>
 			</div>
 			<div class="divider"></div>
-			<div class="wrapper flex-row center">	
-				<div id="temperature"></div>
+			<div class="wrapper flex-row center">
+				<div class="flex-col section-spacer-right">
+					<div id="temperature"></div>
+					<div class="flex-row">
+						<div class="high">
+							<h4 id="tempMax" class="subhead"></h4>
+						</div>
+						<div class="low">
+							<h4 id="tempMin" class="subhead"></h4>
+						</div>
+					</div>
+				</div>
 				<div class="flex-col">
 					<div class="wrapper-right flex-col">
 						<div id="location"></div>
@@ -34,14 +44,7 @@
 						</div>
 					</div>
 					<div class="flex-row wrap">
-						<div class="mini-card">
-							<h4 class="subhead">H:</h4>
-							<div id="tempMax" class="fw-l"></div>
-						</div>
-						<div class="mini-card">
-							<h4 class="subhead">L:</h4>
-							<div id="tempMin" class="fw-l"></div>
-						</div>
+						
 						<div class="mini-card">
 							<h4 class="subhead">Feels Like</h4>
 							<div id="feelsLike" class="fw-l"></div>
@@ -66,9 +69,9 @@
 				</div>
 			</div>
 			<div class="divider"></div>
-			<div id="forecast" class="wrapper flex-col">	
-				<div id="cards" class="flex-row wrap start">
-					<h3 class="subheader-forecast">8-day Forecast</h3>
+			<div id="forecast" class="wrapper flex-col center">
+				<h3 class="subheader-forecast center">8-day Forecast</h3>	
+				<div id="cards" class="flex-row wrap center">
 					<div class="dayCard"></div>
 					<div class="dayCard"></div>
 					<div class="dayCard"></div>
