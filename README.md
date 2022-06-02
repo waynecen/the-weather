@@ -30,8 +30,7 @@ function nearestTenth(i) {
     ];
   dayNameEl.innerText = dayRotation;
 ```
----
-
+  
 ## :construction: Under construction
 - [ ] Error handling on locations that don't exist
 - [ ] Toggle between metric/imperial system
