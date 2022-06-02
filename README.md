@@ -40,4 +40,4 @@ function nearestTenth(i) {
 
 Preview
 ---
-![screenshot of weather app](https://github.com/waynecen/the-weather/blob/main/preview_the-weather.jpg)
+![preview of weather app](preview_the-weather.jpg)
