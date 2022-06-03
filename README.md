@@ -11,7 +11,7 @@ Weather app utilizing OpenWeather's public API to give current weather data and 
 I created this project to learn how to fetch and display data from an API. This project taught me how to utilize async/await functions and helped improve my problem solving skills. I was able to utilize methods in JavaScript to help display the data more efficiently.
 
 #### Writing helper functions for reusability and readability:
-```
+```javascript
 function addZero(i) {
   return i < 10 ? (i = "0" + i) : i;
 }
@@ -21,7 +21,7 @@ function nearestTenth(i) {
 }
 ```
 #### Creating a day rotation to supply the correct day name for the weekly forecast based on current date:
-```
+```javascript
   let dayRotation = 
     days[
       currentDate.getDay() + (i + 1) > 6
