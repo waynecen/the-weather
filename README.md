@@ -31,7 +31,7 @@ function nearestTenth(i) {
   dayNameEl.innerText = dayRotation;
 ```
   
-## :construction: Under construction
+## :construction: To Do
 - [ ] Error handling on locations that don't exist
 - [ ] Toggle between metric/imperial system
 - [ ] Hourly forecast
